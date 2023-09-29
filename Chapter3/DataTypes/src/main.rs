@@ -1,20 +1,20 @@
-fn main() {
-    // addition
-    let sum = 5 + 10;
+use std::io;
 
-    // subtraction
-    let difference = 95.5 - 4.3;
+fn main() {    
+    let a = [1, 2, 3, 4, 5];
+        
+    println!("Please enter an array index.");
+    let mut index = String::new();
+    io::stdin()
+        .read_line(&mut index)
+        .expect("Failed to read line");
 
-    // multiplication
-    let product = 4 * 30;
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect("Index entered was not a number");
 
-    // division
-    let quotient = 56.7 / 32.2;
-    let truncated = -5 / 3; // Results in -1
+    let element = a[index];
 
-    // remainder
-    let remainder = 43  % 5;
-
-    let heart_eyed_cat = '😻';
-    println!("{heart_eyed_cat}")
+    println!("The value of the element at index {index} is: {element}");            
 }
