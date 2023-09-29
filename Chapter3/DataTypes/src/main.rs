@@ -14,4 +14,7 @@ fn main() {
 
     // remainder
     let remainder = 43  % 5;
+
+    let heart_eyed_cat = '😻';
+    println!("{heart_eyed_cat}")
 }
