@@ -21,7 +21,7 @@ fn main() {
             1 => list_department(&company),  
             2 => add_employee(&mut company),  
             3 => remove_employee(&mut company),  
-            4 => remove_deparment(&mut company),  
+            4 => remove_department(&mut company),  
             5 => list_all_company(&company),  
             _ => {
                 println!("Goodbye ;)");
@@ -48,7 +48,7 @@ fn list_department(company: &HashMap<String, Vec<String>>) {
     let mut department = String::new();
     println!("Input the department name:");
     io::stdin().read_line(&mut department).expect("Error on Reading the option");
-    
+   
     match company.get(&department) {
         Some(d) => {
             println!("the employees in department {} are:", department.trim());
@@ -106,7 +106,6 @@ fn remove_employee(company: &mut HashMap<String, Vec<String>>){
     io::stdin().read_line(&mut department).expect("Error on Reading department");
     println!("Input the employee name:");
     io::stdin().read_line(&mut employee).expect("Error on Reading employee");
-    println!("employee removed");
 
     match company.entry(department){
         Entry::Occupied(mut v) => {
@@ -117,16 +116,18 @@ fn remove_employee(company: &mut HashMap<String, Vec<String>>){
     }
 }
 
-fn remove_deparment(company: &mut HashMap<String, Vec<String>>){
+fn remove_department(company: &mut HashMap<String, Vec<String>>){
     let mut department = String::new();
     println!("Input the department name:");
     io::stdin().read_line(&mut department).expect("Error on Reading department");
 
     match company.entry(department.clone()) {
         Entry::Occupied(_v) => {
-            company.remove(&department)
-                .expect("Error removing department {department}");
-            println!("the department {} was deleted!", department.trim());
+            match company.remove(&department) {
+                Some(_s) => println!("the department {} was deleted!",
+                                    department.trim()),
+                None => println!("Error removing department {department}"),
+            };
         },
         Entry::Vacant(_) => println!("department not found!"),
     }
